@@ -47,6 +47,7 @@ class GameActivity : AppCompatActivity(), OnPlayGame {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.restartGameMenuItem -> {
+                onPlayGame()
                 true
             }
 
