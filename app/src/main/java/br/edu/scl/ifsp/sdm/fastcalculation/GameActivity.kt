@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.edu.scl.ifsp.sdm.fastcalculation.databinding.ActivityGameBinding
 
-class GameActivity : AppCompatActivity(), OnPlayGame {
+class GameActivity : AppCompatActivity(), OnPlayGame, OnGameFinish {
 
     private val activityGameBinding: ActivityGameBinding by lazy {
         ActivityGameBinding.inflate(layoutInflater)
@@ -35,7 +35,6 @@ class GameActivity : AppCompatActivity(), OnPlayGame {
         }
 
         settings = intent.getParcelableExtra(Extras.EXTRA_SETTINGS) ?: Settings()
-
         supportFragmentManager.beginTransaction().replace(R.id.gameFrameLayout, WelcomeFragment.newInstance(settings)).commit()
     }
 
@@ -64,5 +63,9 @@ class GameActivity : AppCompatActivity(), OnPlayGame {
 
     override fun onPlayGame() {
         supportFragmentManager.beginTransaction().replace(R.id.gameFrameLayout, GameFragment.newInstance(settings)).commit()
+    }
+
+    override fun onGameFinish(points: String) {
+        supportFragmentManager.beginTransaction().replace(R.id.gameFrameLayout, ResultFragment.newInstance(points)).commit()
     }
 }
